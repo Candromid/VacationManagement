@@ -17,7 +17,7 @@
             };
 
             var workingDaysOfWeek = new List<DayOfWeek> { DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday };
-
+                       
             const int maxVacationDaysPerYear = 28;
 
             GenerateVacations(vacationDictionary, employeeNames, workingDaysOfWeek, maxVacationDaysPerYear);
@@ -46,6 +46,8 @@
         static void GenerateVacations(Dictionary<string, List<DateTime>> vacationDictionary, List<string> employeeNames, List<DayOfWeek> workingDays, int maxVacationDaysPerYear)
         {
             var random = new Random();
+            const int stepOf7Days = 7;
+            const int stepOf14Days = 14;
 
             foreach (var employeeName in employeeNames)
             {
@@ -56,7 +58,7 @@
                     var startDate = GenerateRandomWorkingDay(random, workingDays);
 
                     var maxVacationDuration = maxVacationDaysPerYear - totalVacationDays;
-                    var vacationDuration = random.Next(2) == 0 ? 7 : 14;
+                    var vacationDuration = random.Next(2) == 0 ? stepOf7Days : stepOf14Days;
                     if (vacationDuration > maxVacationDuration)
                     {
                         vacationDuration = maxVacationDuration;
